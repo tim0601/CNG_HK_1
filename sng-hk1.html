@@ -235,6 +235,83 @@
     border-color: #444;
     color: #ddd;
   }
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+    margin: 10px;
+  }
+
+  h2, h3, h4 {
+    font-size: 1.2em;
+  }
+
+  details summary {
+    font-size: 1em;
+  }
+
+  table, .charms-table {
+    display: block;
+    overflow-x: auto;
+    font-size: 13px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 8px;
+    justify-content: center;
+  }
+
+  nav a {
+    white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    padding: 4px 8px;
+    background: #ddd;
+    border-radius: 6px;
+    flex: 0 0 auto;
+  }
+
+  body.dark nav a {
+    background: #333;
+  }
+
+  #theme-toggle,
+  #reset-btn {
+    bottom: 10px;
+    top: auto;
+    right: 10px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  #reset-btn {
+    right: 120px;
+  }
+}
+
+.responsive-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Соотношение 16:9 */
+  height: 0;
+  margin-bottom: 16px;
+}
+.responsive-video iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
   </style>
 </head>
 <body><!--разделы переходы и ТД.-->
@@ -528,8 +605,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/sb9N19TfyDk" frameborder="0" allowfullscreen></iframe>
-
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/sb9N19TfyDk" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 03/02/2022</h4>
@@ -540,8 +622,13 @@
 
 <h3>Прохождение(первый на ютубе)</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/B8NGbvn6PDc" frameborder="0" allowfullscreen></iframe>
-
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/B8NGbvn6PDc" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 07/02/2023</h4>
@@ -559,7 +646,14 @@
 	 
  <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/heWESdRGDns" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/heWESdRGDns" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 03/03/2025</h4>
 </details>
@@ -568,7 +662,13 @@
 <summary><h3>5)Gelerus</h3></summary>
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/uc-zn0ek0OY" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/uc-zn0ek0OY"
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 07/03/2025</h4>
@@ -584,7 +684,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QlOSxSLab3Y" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/QlOSxSLab3Y" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 08/03/2025</h4>
@@ -604,7 +710,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XcZuS4vjtHY" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/XcZuS4vjtHY" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 23/03/2025</h4>
@@ -626,7 +738,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cq7yf6Jinc0" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/cq7yf6Jinc0" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 28/03/2025</h4>
@@ -642,7 +760,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xS0iv1WPHwQ" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/xS0iv1WPHwQ" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 10/04/2025</h4>
@@ -658,7 +782,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/GtCT7RyGBpE" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/GtCT7RyGBpE" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 27/04/2025</h4>
@@ -674,7 +804,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_CvQM9x_hsg" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/_CvQM9x_hsg" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 02/05/2025</h4>
@@ -690,7 +826,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ctiQflZ2bk8" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/ctiQflZ2bk8" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 18/05/2025</h4>
@@ -706,7 +848,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JSDbVCnTYEc" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/JSDbVCnTYEc" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 31/05/2025</h4>
@@ -722,7 +870,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/B6PrEaUxssA" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/B6PrEaUxssA" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 06/06/2025</h4>
@@ -738,7 +892,13 @@
 
 <h3>Прохождение</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AKLqtoq24rM" frameborder="0" allowfullscreen></iframe>
+<div class="responsive-video">
+  <iframe src="https://www.youtube.com/embed/AKLqtoq24rM" 
+          title="YouTube видео"
+          allowfullscreen
+          loading="lazy">
+  </iframe>
+</div>
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 
 <h4>был сделан 08/06/2025</h4>
