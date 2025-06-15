@@ -9,6 +9,21 @@
 </head>
 <head><!--style-->
   <style>
+a.custom-link {
+  text-decoration: none;
+  font-weight: bold;
+}
+body:not(.dark) a.custom-link {
+  color: #0077cc;
+}
+body.dark a.custom-link {
+  color: #cc66ff;
+}
+a.custom-link:visited,
+a.custom-link:hover,
+a.custom-link:active {
+  color: inherit;
+}
   @media (max-width: 600px) {
   body {
     font-size: 14px;
