@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ru">  
+<head><!--название и формат-->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HK</title>
+  <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#121212" />
+</head>
+<head><!--style-->
+  <style>
+  @media (max-width: 600px) {
+  body {
+    font-size: 14px;
+    margin: 10px;
+  }
+  table.charms-table th, table.charms-table td {
+    padding: 6px;
+    font-size: 13px;
+  }
+  nav a {
+    display: block;
+    margin-bottom: 5px;
+  }
+  #video-container {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+    body {
+      margin: 20px;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    header nav {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    #video-container {
+      width: 320px;
+      height: 180px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.5s ease;
+      background: black;
+    }
+    #video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+    }
+    #video-container.fullscreen {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 75vw;
+      height: 75vh;
+      transform: translate(-50%, -50%);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      z-index: 10000;
+      background: black;
+    }
+    #video-container.fullscreen video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+    #close-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      font-size: 24px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10001;
+      display: none;
+      transition: background 0.3s ease;
+    }
+    #close-btn:hover {
+      background: rgba(0,0,0,0.9);
+    }
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .lightbox-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 4px solid white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #000;
+      cursor: zoom-out;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    details {
+      margin-bottom: 5px;
+      padding: 4px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    summary {
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 2px 6px;
+      margin: 0;
+      color: #333;
+      transition: background-color 0.3s ease;
+    }
+    summary:hover {
+      background-color: #e6e6e6;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::before {
+      content: "➤ ";
+      color: #888;
+    }
+    details[open] > summary ~ * {
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-3px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    details details {
+      background-color: #fff;
+      margin-left: 10px;
+      border-left: 2px solid #ccc;
+    }
+
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark details {
+      background-color: #1e1e1e;
+      border-color: #444;
+    }
+    body.dark summary {
+      color: #eee;
+    }
+    body.dark summary:hover {
+      background-color: rgba(255,255,255,0.04);
+    }
+    body.dark .lightbox-overlay {
+      background: rgba(0, 0, 0, 0.95);
+    }
+    body.dark .video-container {
+      background-color: #000;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    }
+    body.dark .video-container.fullscreen {
+      background-color: #000;
+      box-shadow: 0 0 30px rgba(255,255,255,0.2);
+    }
+    body.dark button#theme-toggle {
+      background-color: #eee;
+      color: #111;
+    }
+
+  .highlight {
+    color: #0077cc;
+    font-weight: bold;
+  }
+  body.dark .highlight {
+    color: #66ccff;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+  }
+  table td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+  }
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  body.dark table tr:nth-child(even) {
+    background-color: #1e1e1e;
+  }
+    table.charms-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+  table.charms-table th,
+  table.charms-table td {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.charms-table th {
+    background-color: #e0e0e0;
+  }
+  body.dark table.charms-table th {
+    background-color: #2c2c2c;
+    color: #eee;
+  }
+  body.dark table.charms-table td {
+    background-color: #1e1e1e;
+    border-color: #444;
+    color: #ddd;
+  }
+  </style>
+</head>
+<body><!--разделы переходы и ТД.-->
+  <header> <!--ID для перехода-->
+    <nav>
+      <a href="#1">Сокращения</a> |
+      <a href="#2">Амулеты</a> |
+      <a href="#3">Прочее</a> |
+      <a href="#4">Лиги в таблице</a> |
+      <a href="#5">16 СНГHK с R5</a>
+    </nav>
+  </header>
+
+  <button id="theme-toggle" style="position: fixed; top: 10px; right: 10px; padding: 8px 12px; border-radius: 6px; border: none; cursor: pointer; background-color: #333; color: white; font-weight: bold; z-index: 10001;">Тёмная тема</button>
+  <button id="reset-btn" style="position: fixed; top: 50px; right: 10px; padding: 8px 12px; border-radius: 6px; border: none; cursor: pointer; background-color: #555; color: white; font-weight: bold; z-index: 10001;">Сбросить всё</button>
+  
+<details> <!--Сокращения в Hollow Knight-->
+<summary><h2 id="1">Сокращения в Hollow Knight</h2></summary>
+<details>
+<summary><h3 id="10">В пантеонах</h3></summary>
+<br>04 – Old Nail, White Spells, All Bindings – Старый гвоздь, Белая магия, Все вериги.
+<br>0w – OId Nail, White Spells – Старый гвоздь, Белая магия.
+<br>0w0 – OId Nail, White Spells, 0 Charms – Старый гвоздь, Белая магия, Без амулетов.
+<br>AB – All Bindings – Все вериги.
+<br>EB – Every Binding – Все вериги по отдельности.
+<br>NMA – No Movement Abilities – Без абилок передвижения (клешня, рывок, крылья и.т.п.).
+<br>NNA – No Nail Arts – Без техник гвоздя.
+<br>NO – Nail Only – Только гвоздь.
+<br>ONO – Old Nail Only – Только Старый гвоздь.
+<br>OC – Overcharmed – Перечарованный.
+<br>P5 FOM – Fury Pantheon 5 Overcharmed Mask Binding – Пятый пантеон, ярость активирована с самого начала, переочарован, верига на маску.
+<br>R5 – Radiant (Pantheon) 5 – Пятый пантеон без урона.
+<br>TB – True Bossrush – Пантеон без живокрови, без скамеек, без горячих источников.
+<br>[N] Distance – дойти до чего-то (N) и получить урон/умереть.
+<br>[N] Hits – количество (N) тычек (по игроку).
+<br>LB – Lifeblood – живокровь.
+<br><a href="#1">Назат</a>
+</details>
+<details>
+<summary><h3 id="11">В РадХоге</h3></summary>
+<br>Asc – Ascended – Вознесшийся. Пример: asc markoth.
+<br>Rad – Radiant – Светозарный. Пример: rad marmu.
+<br>RadHog – Radiant Hall of Gods – Светозарные Чертоги богов.
+<br>Super Collector – Коллекционер, Старый гвоздь, Белые заклинания, Все вериги, Без техник гвоздя.
+<br><a href="#1">Назат</a>
+</details>
+<details>
+<summary><h3 id="12">Боссы</h3></summary>
+<br>AbsRad – Absolute Radiance – Всевышняя лучезарность.
+<br>BM – Brooding Mawlek – Задумчивый чревень.
+<br>BV – Broken Vessel – Разбитый сосуд.
+<br>CG – Crystal Guardian – Кристаллический страж.
+<br>DD – Dung Defender – Навозный защитник.
+<br>EG – Enraged Guardian – Разгневанный страж.
+<br>FC – Failed Chamption – Сломленный заступник.
+<br>FK – False Knight – Ложный рыцарь.
+<br>GM – Gruz Mother – Матка Жужж.
+<br>GPZ – Grey Prince Zote – Серый принц зот.
+<br>GT – God Tamer – Божья укротительница.
+<br>H1 – Hornet 1 – Первая Хорнет.
+<br>H2 – Hornet 2 – Вторая Хорнет.
+<br>LK – Lost Kin – Потерянный собрат.
+<br>MMC – Massive Moss Charger – Массивный мшистый громила.
+<br>NE – No Eyes – Незрячая.
+<br>NKG – Nightmare King Grimm – Король кошмаров Гримм.
+<br>OB - Oblobble - закругланы
+<br>PV – Pure Vessel – Чистый сосуд.
+<br>SM – Soul Master – Мастер душ.
+<br>SoB – Sisters of Battle – Боевые сёстры.
+<br>ST – Soul Tyrant – Душегуб.
+<br>SW – Soul Warrior – Воин душ.
+<br>THK – The Hollow Knight – Полый рыцарь.
+<br>TL – Traitor Lord – Предавший лорд.
+<br>TMG – Troupe Master Grimm – Маэстро труппы Гримм.
+<br>VFK – Vengefly King – Король мстекрылов.
+<br>WD – White Defender – Белый защитник.
+<br>WK – Watcher Knights – Рыцари-хранители.
+<br>WN – Winged Nosk – Крылатый носк.
+<br><a href="#1">Назат</a>
+</details>
+<details>
+<summary><h3 id="13">В мире ХК</h3></summary>
+<br>Any% – Прохождение игры на любой % и любую концовку.
+<br>Colo – Colosseum – испытание в колизее.
+<br>GE – Godhome Ending – концовка божьего крова.
+<br>iAny – Impossible Any% – Any% с модом превращающим всю игру в платформинг-испытание.
+<br>Low% – прохождение на минимальный процент, который высвечивается в конце игры.
+<br>PoP – Path of Pain – Путь боли.
+<br>SS – Steel Soul – Стальная душа.
+<br>TE – True Ending – Концовка Грез больше нет.
+<br>ОД - Обычная душа
+<br>WP – White palace – Белый дворец.
+<br><a href="#1">Назат</a>
+</details>
+<details>
+<summary><h3 id="14">В модах</h3></summary>
+<br>AHE – AllHallownestEnhanced – мод, усложняющий различные аспекты игры.
+<br>AT – Abyssal Temple – Испытание бездны из мода Pale Court.
+<br>AbsInf KG – Absolute Inferno King Grimm – Мод на усложненного Короля Кошмаров.
+<br>AnyRad – Any Radiance – Мод на усложненную Всевышнюю Лучезарность.
+<br>CC – Champion’s Call – пантеон “Зов чемпиона” из мода Pale Court.
+<br><a href="#1">Назат</a>
+</details>
+<details>
+<summary><h3 id="15">Прочее</h3></summary>
+<br>Itemless – экипировка как в начале игры.
+<br>NL – NailLess – без гвоздя.
+<br>Spelles - без магии.
+<br>Dashless - без рывка
+<br>Hitless - без урона
+<br>Clawless - без клешни
+<br><a href="#1">Назат</a>
+</details>
+</details>
+
+<details> <!--Амулеты в Hollow Knight-->
+<summary><h2 id="2">Амулеты в Hollow Knight</h2></summary>
+<table class="charms-table">
+  <thead>
+    <tr>
+      <th>Амулет</th>
+      <th>Описание</th>
+      <th>Ячейки</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Капризный компас</td><td>Показывает ваше местоположение на карте.</td><td>1</td></tr>
+    <tr><td>Загребущий рой</td><td>Мушки подбирают гео, упавшее на землю.</td><td>1</td></tr>
+    <tr><td>Крепкий панцирь</td><td>Увеличивает время неуязвимости после получения урона.</td><td>2</td></tr>
+    <tr><td>Ловец душ</td><td>Позволяет получать больше ДУШИ от атак гвоздём.</td><td>2</td></tr>
+    <tr><td>Шаманский камень</td><td>Увеличивает урон заклинаний.</td><td>3</td></tr>
+    <tr><td>Пожиратель душ</td><td>Сильно увеличивает количество получаемой ДУШИ.</td><td>4</td></tr>
+    <tr><td>Трюкач</td><td>Позволяет чаще использовать рывок и делает возможным рывок вниз.</td><td>2</td></tr>
+    <tr><td>Ловкач</td><td>Повышает скорость бега.</td><td>1</td></tr>
+    <tr><td>Песнь гусеничек</td><td>Даёт немного ДУШИ при получении урона.</td><td>1</td></tr>
+    <tr><td>Элегия куколки</td><td>При полном здоровье гвоздь выпускает лучи.</td><td>3</td></tr>
+    <tr><td>Хрупкое сердце</td><td>Увеличивает максимальное здоровье. Ломается при смерти.</td><td>2</td></tr>
+    <tr><td>Хрупкая жадность</td><td>Увеличивает количество получаемого гео. Ломается при смерти.</td><td>2</td></tr>
+    <tr><td>Хрупкая сила</td><td>Увеличивает урон гвоздя. Ломается при смерти.</td><td>3</td></tr>
+    <tr><td>Искажатель заклинаний</td><td>Снижает стоимость заклинаний по ДУШЕ.</td><td>2</td></tr>
+    <tr><td>Непоколебимое тело</td><td>Убирает отдачу при ударах гвоздём.</td><td>1</td></tr>
+    <tr><td>Тяжёлый выпад</td><td>Отбрасывает врагов при ударах гвоздём.</td><td>2</td></tr>
+    <tr><td>Быстрый удар</td><td>Позволяет быстрее наносить удары гвоздём.</td><td>3</td></tr>
+    <tr><td>Длинный гвоздь</td><td>Увеличивает дальность атаки гвоздём.</td><td>2</td></tr>
+    <tr><td>Метка гордости</td><td>Сильно увеличивает дальность атаки гвоздём.</td><td>3</td></tr>
+    <tr><td>Ярость павшего</td><td>Увеличивает урон гвоздя при 1 HP.</td><td>2</td></tr>
+    <tr><td>Колючки страданий</td><td>Атакует врагов шипами при получении урона.</td><td>1</td></tr>
+    <tr><td>Панцирь бальдра</td><td>Даёт защиту при лечении.</td><td>2</td></tr>
+    <tr><td>Тремогнездо</td><td>Заклинание выпускает стаю тремомалышей вместо духа.</td><td>3</td></tr>
+    <tr><td>Герб защитника</td><td>Создаёт облако токсинов возле персонажа.</td><td>1</td></tr>
+    <tr><td>Пылающее чрево</td><td>Создаёт личинок, атакующих врагов, за счёт ДУШИ.</td><td>2</td></tr>
+    <tr><td>Быстрый фокус</td><td>Ускоряет лечение с помощью фокуса.</td><td>3</td></tr>
+    <tr><td>Глубокий фокус</td><td>Лечит сразу два маски, но медленнее.</td><td>4</td></tr>
+    <tr><td>Живительное сердце</td><td>Добавляет 2 маски живокрови после отдыха.</td><td>2</td></tr>
+    <tr><td>Живительное ядро</td><td>Добавляет 4 маски живокрови после отдыха.</td><td>3</td></tr>
+    <tr><td>Благословение Джони</td><td>Заменяет всё здоровье на живокровь, лечение становится недоступно.</td><td>4</td></tr>
+    <tr><td>Кровь Улья</td><td>Постепенно восстанавливает последнее потерянное здоровье.</td><td>4</td></tr>
+    <tr><td>Споровый гриб</td><td>При фокусе выпускает облако спор, наносящих урон.</td><td>1</td></tr>
+    <tr><td>Пронизывающая тень</td><td>Рывок наносит урон врагам.</td><td>2</td></tr>
+    <tr><td>Облик Унн</td><td>Позволяет двигаться во время фокуса.</td><td>2</td></tr>
+    <tr><td>Ореол мастера гвоздя</td><td>Ускоряет зарядку техник гвоздя.</td><td>1</td></tr>
+    <tr><td>Песнь ткача</td><td>Призывает маленьких ткачей, которые атакуют врагов.</td><td>2</td></tr>
+    <tr><td>Щит грёз</td><td>Создаёт вращающийся щит, блокирующий атаки.</td><td>3</td></tr>
+    <tr><td>Повелитель грёз</td><td>Ускоряет заряд Гвоздя грёз и увеличивает добычу сущности.</td><td>1</td></tr>
+    <tr><td>Мрачное дитя</td><td>Призывает дитя Гримма, которое стреляет в врагов. Прогресс зависит от Ритуала.</td><td>2</td></tr>
+    <tr><td>Беспечная песнь</td><td>Иногда полностью блокирует урон.</td><td>3</td></tr>
+    <tr><td>Душа Короля</td><td>Постепенно восстанавливает ДУШУ. Требуется для финала.</td><td>5</td></tr>
+    <tr><td>Сердце пустоты</td><td>Финальный амулет. Не снимается. Объединяет Пустоту и даёт доступ к финальной концовке.</td><td>0</td></tr>
+  </tbody>
+</table>
+</details>
+
+<details> <!--Прочее-->
+<summary><h3 id="3">Прочее</h3></summary>
+<details>
+<summary><h4>Зот Гифкии</h4></summary>
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/zot-1.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+</details>
+
+<details>
+<summary><h4>Лучка Гифкии</h4></summary>
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/luczka-1.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+</details>
+</details>
+
+<details> <!-- Лиги в таблице Мяты-->
+<summary><h3 id="4">Лиги в таблице Мяты</h3></summary>
+<h4>🥇/🥈/🥉Выдаются за выполнение всех выделенных челленджей в соответствующей лиге.<br>
+Челленджи проще P5 или P1AB не принимаются.</h4>
+
+<details>
+<summary><h4>14.06.2025</h4></summary>
+
+<h3 style="color: #9933cc;">ПУСТОТА</h3>
+<table>
+<tr><td>R5 ONO</td></tr>
+<tr><td>R5AB 150%</td></tr>
+<tr><td>P5AB Itemless</td></tr>
+<tr><td>R045</td></tr>
+</table>
+
+<h3 style="color: #00ccff;">АЛМАЗ</h3>
+<table>
+<tr><td>R5 0w0</td></tr>
+<tr><td>R5AB NO</td></tr>
+<tr><td>R5 150%</td></tr>
+<tr><td>R5 AHE</td></tr>
+<tr><td>Gold Master</td></tr>
+<tr><td>P5 Itemless</td></tr>
+<tr><td>R5AB</td></tr>
+<tr><td>R5 0w</td></tr>
+</table>
+
+<h3 style="color: gold;">ЗОЛОТО</h3>
+<table>
+<tr><td>R5NL</td></tr>
+<tr><td>R5 NNA NMA</td></tr>
+<tr><td class="highlight">R041-4</td></tr>
+<tr><td>RadHog AB ONO 43/44</td></tr>
+<tr><td>Asc AnyRad 2.0</td></tr>
+<tr><td class="highlight">R5 Charmless</td></tr>
+<tr><td class="highlight">R5 NO</td></tr>
+<tr><td>AnyRad 2.0</td></tr>
+<tr><td>Silver Master</td></tr>
+<tr><td class="highlight">P5AB 150%</td></tr>
+<tr><td>R5</td></tr>
+<tr><td class="highlight">R04 Collector</td></tr>
+<tr><td class="highlight">P5AB AHE</td></tr>
+<tr><td>P045</td></tr>
+<tr><td>R04CC</td></tr>
+<tr><td>Rad AnyRad 1.0</td></tr>
+</table>
+
+<h3 style="color: silver;">СЕРЕБРО</h3>
+<table>
+<tr><td class="highlight">RadHog 04 43/44</td></tr>
+<tr><td class="highlight">R1-4AB</td></tr>
+<tr><td class="highlight">Fury R5</td></tr>
+<tr><td class="highlight">R1-4 0w</td></tr>
+<tr><td>Asc AnyRad 1.0</td></tr>
+<tr><td class="highlight">P5AB OC</td></tr>
+<tr><td>R1-4NL</td></tr>
+<tr><td>P5AB NO</td></tr>
+<tr><td>P5AB TB</td></tr>
+<tr><td>P041-4</td></tr>
+<tr><td class="highlight">AnyRad 1.0</td></tr>
+<tr><td>Bronze Master</td></tr>
+<tr><td>RadHog 150%</td></tr>
+<tr><td>P5AB</td></tr>
+<tr><td>RadHog AB</td></tr>
+<tr><td class="highlight">P5 150%</td></tr>
+<tr><td>RCC</td></tr>
+<tr><td>RadHog 0w</td></tr>
+</table>
+
+<h3 tyle="color: #cd7f32;">БРОНЗА</h3>
+<table>
+<tr><td class="highlight">R1-4</td></tr>
+<tr><td>P5 0w OC</td></tr>
+<tr><td class="highlight">P1-4AB</td></tr>
+<tr><td class="highlight">P5 AHE</td></tr>
+<tr><td class="highlight">P1-4 150%</td></tr>
+<tr><td>CCAB</td></tr>
+<tr><td>P5 FOM</td></tr>
+<tr><td>RadHog Charmless</td></tr>
+<tr><td>P5 OC</td></tr>
+<tr><td>P5 Charmless</td></tr>
+</table>
+
+</details>
+</details>
+
+<details> <!--Первые 16 игроков в СНГ HK с R5-->
+<summary><h2 id="5">Первые 16 игроков в СНГ HK с R5</h2></summary>
+<details>
+<summary><h3>Список</h3></summary>
+<img src="images/Список-игроков-R5.jpg"
+     alt="Список-игроков-R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+</details>
+
+<details>
+<summary><h3>1)Prtsscout</h3></summary>
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/Prtsscout_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 03/02/2022</h4>
+</details>
+
+<details>
+<summary><h3>2)mint</h3></summary>
+
+<h3>Прохождение(первый на ютубе)</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/mint_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 07/02/2023</h4>
+</details>
+
+<h3>Corvus</h3>
+
+<details>
+<summary><h3>4)Hmander</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@hman7772010-R5.png"
+     alt="Hmander R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+<h4>был сделан 03/03/2025</h4>
+</details>
+
+<h3>Gelerus</h3>
+
+<details>
+<summary><h3>6)Kalemen</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@Kalemen-R5.png"
+     alt="Kalemen R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/Kalemen_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 08/03/2025</h4>
+</details>
+
+<details>
+<summary><h3>7)Lokotok</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@Lokotok-R5.png"
+     alt="Lokotok R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+<img src="images/@Lokotok-R5_1.png"
+     alt="Lokotok R5 part 2"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/Lokotok_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 23/03/2025</h4>
+</details>
+
+<details>
+<summary><h3>8)Miha</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@ytcuyvgy-R5.png"
+     alt="Miha R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Голосовая реакция с скреншота:</h3>
+<audio controls>
+  <source src="audio/miha_r5_reaction.ogg" type="audio/ogg">
+  Ваш браузер не поддерживает аудиоэлемент.
+</audio>
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/miha_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 28/03/2025</h4>
+</details>
+
+<details>
+<summary><h3>9)almachuar</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@almachuar-R5.png"
+     alt="almachuar R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/almachuar_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 10/04/2025</h4>
+</details>
+
+<details>
+<summary><h3>10)Shenae</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@Shenae-R5.png"
+     alt="Shenae R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/Shenae_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 27/04/2025</h4>
+</details>
+
+<details>
+<summary><h3>11)realing29</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@realing29-R5.png"
+     alt="realing29 R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/realing29_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 02/05/2025</h4>
+</details>
+
+<details>
+<summary><h3>12)Furgon273</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@Furgon273-R5.png"
+     alt="Furgon273 R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/Furgon273_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 18/05/2025</h4>
+</details>
+
+<details>
+<summary><h3>13)яблоко</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@яблоко-R5.png"
+     alt="яблоко R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/яблоко_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 31/05/2025</h4>
+</details>
+
+<details>
+<summary><h3>14)NightFury</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@NightFury-R5.png"
+     alt="NightFury R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/NightFury_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 06/06/2025</h4>
+</details>
+
+<details>
+<summary><h3>15)flinnnny</h3></summary>
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/@flinnnny-R5.png"
+     alt="flinnnny R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+
+<h3>Прохождение</h3>
+
+<div id="video-container" onclick="toggleFullscreen()">
+  <video src="video/flinnnny_r5.mp4" controls preload="metadata"></video>
+</div>
+<button id="close-btn" onclick="closeFullscreen()">✕</button>
+
+<h4>был сделан 08/06/2025</h4>
+</details>
+
+</details>
+</body>
+
+<boby>
+ <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Zoom">
+  </div>
+
+<script>
+    function openLightbox(src) {
+      const overlay = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      img.src = src;
+      overlay.style.display = "flex";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+
+    const toggleBtn = document.getElementById('theme-toggle');
+    const resetBtn = document.getElementById('reset-btn');
+    function applyTheme(theme) {
+      document.body.classList.toggle('dark', theme === 'dark');
+      toggleBtn.innerText = theme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('theme', newTheme);
+      applyTheme(newTheme);
+    });
+
+    const detailsAll = document.querySelectorAll('details');
+
+    function saveDetailsState() {
+      const state = Array.from(detailsAll).map(d => d.open);
+      localStorage.setItem('detailsState', JSON.stringify(state));
+    }
+
+    function restoreDetailsState() {
+      const saved = JSON.parse(localStorage.getItem('detailsState') || '[]');
+      saved.forEach((isOpen, i) => {
+        if (detailsAll[i]) detailsAll[i].open = isOpen;
+      });
+    }
+
+    detailsAll.forEach(d => d.addEventListener('toggle', saveDetailsState));
+    restoreDetailsState();
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("scrollPos", window.scrollY);
+    });
+    window.addEventListener("load", () => {
+      const scroll = +localStorage.getItem("scrollPos") || 0;
+      setTimeout(() => window.scrollTo(0, scroll), 50);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if (confirm('Сбросить все настройки?')) {
+        localStorage.clear();
+        location.reload();
+      }
+    });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log('✅ Service Worker зарегистрирован!'));
+  }
+</script>
+</body>
+</html>
