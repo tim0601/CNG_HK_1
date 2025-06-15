@@ -278,24 +278,44 @@
   body.dark nav a {
     background: #333;
   }
-   #theme-toggle,
-  #reset-btn {
-    width: auto;
-    bottom: 10px;
-    top: auto;
-    right: 10px;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    position: fixed;
-    z-index: 10001;
-    white-space: nowrap;
-  }
+  /* Гарантированная адаптация кнопок на любых экранах */
+#theme-toggle,
+#reset-btn {
+  width: auto !important;
+  max-width: 90% !important;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  position: fixed;
+  right: 10px;
+  z-index: 10001;
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
 
+#theme-toggle {
+  top: 10px;
+}
+
+#reset-btn {
+  top: 50px;
+}
+
+@media (max-width: 600px) {
+  #theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
   #reset-btn {
-    right: 120px;
+    top: 10px;
+    right: 140px; /* Сдвиг влево от theme-toggle */
   }
 }
+
 
 .responsive-video {
   position: relative;
