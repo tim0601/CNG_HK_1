@@ -8,7 +8,23 @@
 <meta name="theme-color" content="#121212" />
 </head>
 <head><!--style-->
-  <style>
+<style>
+<head><!-- /* ======================== ОБЩИЕ НАСТРОЙКИ ======================== */ -->
+body {
+  margin: 20px;
+  background: #f0f0f0;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+html {
+  scroll-behavior: smooth;
+}
+body.dark {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+</head>
+<head><!-- /* ======================== ССЫЛКИ ======================== */ -->
 a.custom-link {
   text-decoration: none;
   font-weight: bold;
@@ -24,232 +40,314 @@ a.custom-link:hover,
 a.custom-link:active {
   color: inherit;
 }
-  @media (max-width: 600px) {
-  body {
-    font-size: 14px;
-    margin: 10px;
-  }
-  table.charms-table th, table.charms-table td {
-    padding: 6px;
-    font-size: 13px;
-  }
-  nav a {
-    display: block;
-    margin-bottom: 5px;
-  }
-  #video-container {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-  }
+</head>
+<head><!-- /* ======================== ШАПКА И НАВИГАЦИЯ ======================== */ -->
+header nav {
+  text-align: center;
+  margin-bottom: 10px;
 }
-    body {
-      margin: 20px;
-      background: #f0f0f0;
-      font-family: Arial, sans-serif;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    header nav {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    #video-container {
-      width: 320px;
-      height: 180px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      transition: all 0.5s ease;
-      background: black;
-    }
-    #video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 12px;
-    }
-    #video-container.fullscreen {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 75vw;
-      height: 75vh;
-      transform: translate(-50%, -50%);
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
-      z-index: 10000;
-      background: black;
-    }
-    #video-container.fullscreen video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-    #close-btn {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      font-size: 24px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 10001;
-      display: none;
-      transition: background 0.3s ease;
-    }
-    #close-btn:hover {
-      background: rgba(0,0,0,0.9);
-    }
-    .lightbox-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    .lightbox-overlay img {
-      max-width: 90%;
-      max-height: 90%;
-      border: 4px solid white;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #000;
-      cursor: zoom-out;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-bottom: 10px;
-    }
-    details {
-      margin-bottom: 5px;
-      padding: 4px;
-      background-color: #f9f9f9;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    summary {
-      font-size: 1em;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 2px 6px;
-      margin: 0;
-      color: #333;
-      transition: background-color 0.3s ease;
-    }
-    summary:hover {
-      background-color: #e6e6e6;
-    }
-    summary::-webkit-details-marker {
-      display: none;
-    }
-    summary::before {
-      content: "➤ ";
-      color: #888;
-    }
-    details[open] > summary ~ * {
-      animation: fadeIn 0.3s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-3px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    details details {
-      background-color: #fff;
-      margin-left: 10px;
-      border-left: 2px solid #ccc;
-    }
+nav a {
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  padding: 4px 8px;
+  background: #ddd;
+  border-radius: 6px;
+  flex: 0 0 auto;
+}
+body.dark nav a {
+  background: #333;
+}
+</head>
+<head><!-- /* ======================== КНОПКИ ТЕМЫ И СБРОСА ======================== */ -->
+#theme-toggle,
+#reset-btn {
+  width: auto;
+  max-width: 90%;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  position: fixed;
+  right: 10px;
+  z-index: 10001;
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+#theme-toggle { top: 10px; }
+#reset-btn { top: 50px; }
 
-    body.dark {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-    body.dark details {
-      background-color: #1e1e1e;
-      border-color: #444;
-    }
-    body.dark summary {
-      color: #eee;
-    }
-    body.dark summary:hover {
-      background-color: rgba(255,255,255,0.04);
-    }
-    body.dark .lightbox-overlay {
-      background: rgba(0, 0, 0, 0.95);
-    }
-    body.dark .video-container {
-      background-color: #000;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-    }
-    body.dark .video-container.fullscreen {
-      background-color: #000;
-      box-shadow: 0 0 30px rgba(255,255,255,0.2);
-    }
-    body.dark button#theme-toggle {
-      background-color: #eee;
-      color: #111;
-    }
-
-  .highlight {
-    color: #0077cc;
-    font-weight: bold;
-  }
-  body.dark .highlight {
-    color: #66ccff;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 15px;
-  }
-  table td {
-    border: 1px solid #ccc;
-    padding: 6px 10px;
-  }
-  table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  body.dark table tr:nth-child(even) {
-    background-color: #1e1e1e;
-  }
-    table.charms-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-    font-size: 14px;
-  }
-  table.charms-table th,
-  table.charms-table td {
-    border: 1px solid #ccc;
-    padding: 8px 10px;
-    text-align: left;
-    vertical-align: top;
-  }
-  table.charms-table th {
-    background-color: #e0e0e0;
-  }
-  body.dark table.charms-table th {
-    background-color: #2c2c2c;
-    color: #eee;
-  }
-  body.dark table.charms-table td {
-    background-color: #1e1e1e;
-    border-color: #444;
-    color: #ddd;
-  }
+body.dark button#theme-toggle {
+  background-color: #eee;
+  color: #111;
+}
+</head>
+<head><!-- /* ======================== СТИЛЬ АМУЛЕТОВ ======================== */ -->
+.charm-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+body.dark .charm-icon {
+  filter: drop-shadow(0 0 1px rgba(255,255,255,0.2));
+}
+</head>
+<head><!-- /* ======================== СТИЛЬ ИКОНКИ БОССА ======================== */ -->
+.boss-entry {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.boss-entry img {
+  width: 100px;
+  height: auto;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.boss-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+.boss-name-ru {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+}
+.boss-name-en {
+  font-size: 1em;
+  color: #666;
+}
+.boss-name-en .abbr {
+  color: #999;
+  font-weight: normal;
+}
+body.dark .boss-entry {
+  background-color: #1a1a1a;
+  border-color: #444;
+}
+body.dark .boss-name-ru {
+  color: #ffed7a;
+}
+body.dark .boss-name-en {
+  color: #aaa;
+}
+body.dark .boss-name-en .abbr {
+  color: #777;
+}
+</head>
+<head><!-- /* ======================== ВИДЕО И GIF ======================== */ -->
+#video-container {
+  width: 320px;
+  height: 180px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  background: black;
+}
+#video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+#video-container.fullscreen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 75vw;
+  height: 75vh;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
+  z-index: 10000;
+  background: black;
+}
+#video-container.fullscreen video {
+  object-fit: contain;
+}
+body.dark .video-container {
+  background-color: #000;
+  box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+}
+body.dark .video-container.fullscreen {
+  box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+</head>
+<head><!-- /* ======================== ЗАКРЫТИЕ ВИДЕО / Lightbox ======================== */ -->
+#close-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10001;
+  display: none;
+}
+#close-btn:hover {
+  background: rgba(0,0,0,0.9);
+}
+.lightbox-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border: 4px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #000;
+  cursor: zoom-out;
+}
+body.dark .lightbox-overlay {
+  background: rgba(0, 0, 0, 0.95);
+}
+</head>
+<head><!-- /* ======================== КАРТИНКИ ОБЩИЕ ======================== */ -->
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+</head>
+<head><!-- /* ======================== СПОЙЛЕРЫ / DETAILS ======================== */ -->
+details {
+  margin-bottom: 5px;
+  padding: 4px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+summary {
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: 0;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+summary:hover {
+  background-color: #e6e6e6;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::before {
+  content: "➤ ";
+  color: #888;
+}
+details[open] > summary ~ * {
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+details details {
+  background-color: #fff;
+  margin-left: 10px;
+  border-left: 2px solid #ccc;
+}
+body.dark details {
+  background-color: #1e1e1e;
+  border-color: #444;
+}
+body.dark summary {
+  color: #eee;
+}
+body.dark summary:hover {
+  background-color: rgba(255,255,255,0.04);
+}
+</head>
+<head><!-- /* ======================== ТАБЛИЦЫ ======================== */ -->
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+table td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+}
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+body.dark table tr:nth-child(even) {
+  background-color: #1e1e1e;
+}
+table.charms-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+table.charms-table th,
+table.charms-table td {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+table.charms-table th {
+  background-color: #e0e0e0;
+}
+body.dark table.charms-table th {
+  background-color: #2c2c2c;
+  color: #eee;
+}
+body.dark table.charms-table td {
+  background-color: #1e1e1e;
+  border-color: #444;
+  color: #ddd;
+}
+</head>
+<head><!-- /* ======================== ВИДЕО (YouTube) ======================== */ -->
+.responsive-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  margin-bottom: 16px;
+}
+.responsive-video iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</head>
+<head><!-- /* ======================== АДАПТИВ ДЛЯ МОБИЛОК ======================== */ -->
 @media (max-width: 600px) {
   body {
     font-size: 14px;
@@ -280,86 +378,24 @@ a.custom-link:active {
   }
 
   nav a {
-    white-space: nowrap;
-    text-decoration: none;
-    color: inherit;
-    font-weight: bold;
-    padding: 4px 8px;
-    background: #ddd;
-    border-radius: 6px;
-    flex: 0 0 auto;
+    margin-bottom: 0;
   }
 
-  body.dark nav a {
-    background: #333;
-  }
-#theme-toggle,
-#reset-btn {
-  width: auto !important;
-  max-width: 90% !important;
-  white-space: nowrap;
-  font-size: 14px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  position: fixed;
-  right: 10px;
-  z-index: 10001;
-  background-color: #333;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  #theme-toggle { top: 10px; right: 10px; }
+  #reset-btn { top: 10px; right: 140px; }
 }
-
-#theme-toggle {
-  top: 10px;
-}
-
-#reset-btn {
-  top: 50px;
-}
-
-@media (max-width: 600px) {
-  #theme-toggle {
-    top: 10px;
-    right: 10px;
-  }
-  #reset-btn {
-    top: 10px;
-    right: 140px;
-  }
-}
-
-
-.responsive-video {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  margin-bottom: 16px;
-}
-.responsive-video iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-  </style>
+</head>
+</style>
 </head>
 <body><!--разделы переходы и ТД.-->
   <header> <!--ID для перехода-->
     <nav>
       <a href="#1">Сокращения</a> |
-      <a href="#2">Амулеты</a> |
-      <a href="#3">Прочее</a> |
-      <a href="#4">Лиги в таблице</a> |
-      <a href="#5">16 СНГHK с R5</a>
+	  <a href="#boss-table">Боссы</a> |
+      <a href="#charms-table">Амулеты</a> |
+      <a href="#Прочее">Прочее</a> |
+      <a href="#Lugi">Лиги в таблице</a> |
+      <a href="#16SNGR5">16 СНГHK с R5</a>
     </nav>
   </header>
 
@@ -464,66 +500,245 @@ html {
 <br><a href="#1">Назат</a>
 </details>
 </details>
+<details> <!--Боссы в Hollow Knight-->
+<summary><h2 id="boss-table">Боссы в Hollow Knight</h2></summary>
 
+<div class="boss-entry">
+    <img src="images/боссы/Gruz-Mother.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Матка Жужж</div>
+      <div class="boss-name-en">Gruz Mother <span class="abbr">(GM)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Vengefly-King.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Король мстекрылов</div>
+      <div class="boss-name-en">Vengefly King<span class="abbr">(VK)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Brooding-Mawlek.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Задумчивый чревень</div>
+      <div class="boss-name-en">Brooding Mawlek<span class="abbr">(BM)</span></div>
+	  </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/False-Knight.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Ложный Рыцарь</div>
+      <div class="boss-name-en">False Knight<span class="abbr">(FK)</span></div>
+	  </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Failed-Chamption.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Сломленный заступник</div>
+      <div class="boss-name-en">Failed Chamption<span class="abbr">(FC)</span></div>
+	  </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Hornet.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Хорнет</div>
+      <div class="boss-name-en">Hornet<span class="abbr">(H1 or H2)</span></div>
+	  </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Massive-Moss-Charger.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Массивный мшистый громила</div>
+      <div class="boss-name-en">Massive Moss Charger<span class="abbr">(MMC)</span></div>
+	  </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Flukemarm.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Тремоматка</div>
+      <div class="boss-name-en">Flukemarm</div>
+	  </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Mantis-Lords.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Лорды богомолов</div>
+      <div class="boss-name-en">Mantis Lords</div>
+	  </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Sisters-of-Battle.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Боевые сёстры</div>
+      <div class="boss-name-en">Sisters of Battle<span class="abbr">(SoB)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Oblobble.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Закруглан</div>
+      <div class="boss-name-en">Oblobble</div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Hive-Knight.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Рыцарь Улья</div>
+      <div class="boss-name-en">Hive Knight</div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Broken-Vessel.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Разбитый Сосуд</div>
+      <div class="boss-name-en">Broken Vessel<span class="abbr">(BV)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Lost-Kin.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Потерянный собрат</div>
+      <div class="boss-name-en">Lost Kin</div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Nosk.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Носк</div>
+      <div class="boss-name-en">Nosk</div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Winged-Nosk.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Крылатый Носк</div>
+      <div class="boss-name-en">Winged Nosk<span class="abbr">(WN)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Collector.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Коллекционер</div>
+      <div class="boss-name-en">The Collector</div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/God-Tamer.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Божья укротительница</div>
+      <div class="boss-name-en">God Tamer<span class="abbr">(GT)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Crystal-Guardian.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Кристаллический страж</div>
+      <div class="boss-name-en">Crystal Guardian<span class="abbr">(CG)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Crystal-Guardian.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Разгневанный страж</div>
+      <div class="boss-name-en">Enraged Guardian<span class="abbr">(EG)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Uumuu.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Ууму</div>
+      <div class="boss-name-en">Uumuu</div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Traitor-Lord.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Предавший лорд</div>
+      <div class="boss-name-en">Traitor Lord<span class="abbr">(TL)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Grey-Prince-Zote.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Серый принц Зот</div>
+      <div class="boss-name-en">Grey Prince Zote<span class="abbr">(GPZ)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Soul-Warrior.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Воин душ</div>
+      <div class="boss-name-en">Soul Warrior<span class="abbr">(SW)</span></div>
+    </div>
+</div>
+<div class="boss-entry">
+    <img src="images/боссы/Soul-Master.png" alt="иконка">
+    <div class="boss-text">
+      <div class="boss-name-ru">Мастер душ</div>
+      <div class="boss-name-en">Soul Master<span class="abbr">(SM)</span></div>
+    </div>
+</div>
+<h5>сорри дальше не доделал на виходных уже вийдет полный список</h><
+</details>
 <details> <!--Амулеты в Hollow Knight-->
-<summary><h2 id="2">Амулеты в Hollow Knight</h2></summary>
+<summary><h2 id="charms-table">Амулеты в Hollow Knight</h2></summary>
 <table class="charms-table">
   <thead>
     <tr>
+      <th>Иконка</th>
       <th>Амулет</th>
       <th>Описание</th>
       <th>Ячейки</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>Капризный компас</td><td>Показывает ваше местоположение на карте.</td><td>1</td></tr>
-    <tr><td>Загребущий рой</td><td>Мушки подбирают гео, упавшее на землю.</td><td>1</td></tr>
-    <tr><td>Крепкий панцирь</td><td>Увеличивает время неуязвимости после получения урона.</td><td>2</td></tr>
-    <tr><td>Ловец душ</td><td>Позволяет получать больше ДУШИ от атак гвоздём.</td><td>2</td></tr>
-    <tr><td>Шаманский камень</td><td>Увеличивает урон заклинаний.</td><td>3</td></tr>
-    <tr><td>Пожиратель душ</td><td>Сильно увеличивает количество получаемой ДУШИ.</td><td>4</td></tr>
-    <tr><td>Трюкач</td><td>Позволяет чаще использовать рывок и делает возможным рывок вниз.</td><td>2</td></tr>
-    <tr><td>Ловкач</td><td>Повышает скорость бега.</td><td>1</td></tr>
-    <tr><td>Песнь гусеничек</td><td>Даёт немного ДУШИ при получении урона.</td><td>1</td></tr>
-    <tr><td>Элегия куколки</td><td>При полном здоровье гвоздь выпускает лучи.</td><td>3</td></tr>
-    <tr><td>Хрупкое сердце</td><td>Увеличивает максимальное здоровье. Ломается при смерти.</td><td>2</td></tr>
-    <tr><td>Хрупкая жадность</td><td>Увеличивает количество получаемого гео. Ломается при смерти.</td><td>2</td></tr>
-    <tr><td>Хрупкая сила</td><td>Увеличивает урон гвоздя. Ломается при смерти.</td><td>3</td></tr>
-    <tr><td>Искажатель заклинаний</td><td>Снижает стоимость заклинаний по ДУШЕ.</td><td>2</td></tr>
-    <tr><td>Непоколебимое тело</td><td>Убирает отдачу при ударах гвоздём.</td><td>1</td></tr>
-    <tr><td>Тяжёлый выпад</td><td>Отбрасывает врагов при ударах гвоздём.</td><td>2</td></tr>
-    <tr><td>Быстрый удар</td><td>Позволяет быстрее наносить удары гвоздём.</td><td>3</td></tr>
-    <tr><td>Длинный гвоздь</td><td>Увеличивает дальность атаки гвоздём.</td><td>2</td></tr>
-    <tr><td>Метка гордости</td><td>Сильно увеличивает дальность атаки гвоздём.</td><td>3</td></tr>
-    <tr><td>Ярость павшего</td><td>Увеличивает урон гвоздя при 1 HP.</td><td>2</td></tr>
-    <tr><td>Колючки страданий</td><td>Атакует врагов шипами при получении урона.</td><td>1</td></tr>
-    <tr><td>Панцирь бальдра</td><td>Даёт защиту при лечении.</td><td>2</td></tr>
-    <tr><td>Тремогнездо</td><td>Заклинание выпускает стаю тремомалышей вместо духа.</td><td>3</td></tr>
-    <tr><td>Герб защитника</td><td>Создаёт облако токсинов возле персонажа.</td><td>1</td></tr>
-    <tr><td>Пылающее чрево</td><td>Создаёт личинок, атакующих врагов, за счёт ДУШИ.</td><td>2</td></tr>
-    <tr><td>Быстрый фокус</td><td>Ускоряет лечение с помощью фокуса.</td><td>3</td></tr>
-    <tr><td>Глубокий фокус</td><td>Лечит сразу два маски, но медленнее.</td><td>4</td></tr>
-    <tr><td>Живительное сердце</td><td>Добавляет 2 маски живокрови после отдыха.</td><td>2</td></tr>
-    <tr><td>Живительное ядро</td><td>Добавляет 4 маски живокрови после отдыха.</td><td>3</td></tr>
-    <tr><td>Благословение Джони</td><td>Заменяет всё здоровье на живокровь, лечение становится недоступно.</td><td>4</td></tr>
-    <tr><td>Кровь Улья</td><td>Постепенно восстанавливает последнее потерянное здоровье.</td><td>4</td></tr>
-    <tr><td>Споровый гриб</td><td>При фокусе выпускает облако спор, наносящих урон.</td><td>1</td></tr>
-    <tr><td>Пронизывающая тень</td><td>Рывок наносит урон врагам.</td><td>2</td></tr>
-    <tr><td>Облик Унн</td><td>Позволяет двигаться во время фокуса.</td><td>2</td></tr>
-    <tr><td>Ореол мастера гвоздя</td><td>Ускоряет зарядку техник гвоздя.</td><td>1</td></tr>
-    <tr><td>Песнь ткача</td><td>Призывает маленьких ткачей, которые атакуют врагов.</td><td>2</td></tr>
-    <tr><td>Щит грёз</td><td>Создаёт вращающийся щит, блокирующий атаки.</td><td>3</td></tr>
-    <tr><td>Повелитель грёз</td><td>Ускоряет заряд Гвоздя грёз и увеличивает добычу сущности.</td><td>1</td></tr>
-    <tr><td>Мрачное дитя</td><td>Призывает дитя Гримма, которое стреляет в врагов. Прогресс зависит от Ритуала.</td><td>2</td></tr>
-    <tr><td>Беспечная песнь</td><td>Иногда полностью блокирует урон.</td><td>3</td></tr>
-    <tr><td>Душа Короля</td><td>Постепенно восстанавливает ДУШУ. Требуется для финала.</td><td>5</td></tr>
-    <tr><td>Сердце пустоты</td><td>Финальный амулет. Не снимается. Объединяет Пустоту и даёт доступ к финальной концовке.</td><td>0</td></tr>
+    <tr><td><img src="images/амулеты/капризный-компас.png" class="charm-icon" alt=""></td><td>Капризный компас</td><td>Показывает ваше местоположение на карте.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/загребущий-рой.png" class="charm-icon" alt=""></td><td>Загребущий рой</td><td>Мушки подбирают гео, упавшее на землю.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/крепкий-панцирь.png" class="charm-icon" alt=""></td><td>Крепкий панцирь</td><td>Увеличивает время неуязвимости после получения урона.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/ловец-душ.png" class="charm-icon" alt=""></td><td>Ловец душ</td><td>Позволяет получать больше ДУШИ от атак гвоздём.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/шаманский-камень.png" class="charm-icon" alt=""></td><td>Шаманский камень</td><td>Увеличивает урон заклинаний.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/пожиратель-душ.png" class="charm-icon" alt=""></td><td>Пожиратель душ</td><td>Сильно увеличивает количество получаемой ДУШИ.</td><td>4</td></tr>
+    <tr><td><img src="images/амулеты/трюкач.png" class="charm-icon" alt=""></td><td>Трюкач</td><td>Позволяет чаще использовать рывок и делает возможным рывок вниз.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/ловкач.png" class="charm-icon" alt=""></td><td>Ловкач</td><td>Повышает скорость бега.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/песнь-гусеничек.png" class="charm-icon" alt=""></td><td>Песнь гусеничек</td><td>Даёт немного ДУШИ при получении урона.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/элегия-куколки.png" class="charm-icon" alt=""></td><td>Элегия куколки</td><td>При полном здоровье гвоздь выпускает лучи.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/хрупкое-сердце.png" class="charm-icon" alt=""></td><td>Хрупкое сердце</td><td>Увеличивает максимальное здоровье. Ломается при смерти.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/хрупкая-жадность.png" class="charm-icon" alt=""></td><td>Хрупкая жадность</td><td>Увеличивает количество получаемого гео. Ломается при смерти.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/хрупкая-сила.png" class="charm-icon" alt=""></td><td>Хрупкая сила</td><td>Увеличивает урон гвоздя. Ломается при смерти.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/искажатель-заклинаний.png" class="charm-icon" alt=""></td><td>Искажатель заклинаний</td><td>Снижает стоимость заклинаний по ДУШЕ.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/непоколебимое-тело.png" class="charm-icon" alt=""></td><td>Непоколебимое тело</td><td>Убирает отдачу при ударах гвоздём.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/тяжёлый-выпад.png" class="charm-icon" alt=""></td><td>Тяжёлый выпад</td><td>Отбрасывает врагов при ударах гвоздём.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/быстрый-удар.png" class="charm-icon" alt=""></td><td>Быстрый удар</td><td>Позволяет быстрее наносить удары гвоздём.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/длинный-гвоздь.png" class="charm-icon" alt=""></td><td>Длинный гвоздь</td><td>Увеличивает дальность атаки гвоздём.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/метка-гордости.png" class="charm-icon" alt=""></td><td>Метка гордости</td><td>Сильно увеличивает дальность атаки гвоздём.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/ярость-павшего.png" class="charm-icon" alt=""></td><td>Ярость павшего</td><td>Увеличивает урон гвоздя при 1 HP.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/колючки-страданий.png" class="charm-icon" alt=""></td><td>Колючки страданий</td><td>Атакует врагов шипами при получении урона.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/панцирь-бальдра.png" class="charm-icon" alt=""></td><td>Панцирь бальдра</td><td>Даёт защиту при лечении.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/тремогнездо.png" class="charm-icon" alt=""></td><td>Тремогнездо</td><td>Заклинание выпускает стаю тремомалышей вместо духа.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/герб-защитника.png" class="charm-icon" alt=""></td><td>Герб защитника</td><td>Создаёт облако токсинов возле персонажа.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/пылающее-чрево.png" class="charm-icon" alt=""></td><td>Пылающее чрево</td><td>Создаёт личинок, атакующих врагов, за счёт ДУШИ.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/быстрый-фокус.png" class="charm-icon" alt=""></td><td>Быстрый фокус</td><td>Ускоряет лечение с помощью фокуса.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/глубокий-фокус.png" class="charm-icon" alt=""></td><td>Глубокий фокус</td><td>Лечит сразу два маски, но медленнее.</td><td>4</td></tr>
+    <tr><td><img src="images/амулеты/живительное-сердце.png" class="charm-icon" alt=""></td><td>Живительное сердце</td><td>Добавляет 2 маски живокрови после отдыха.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/живительное-ядро.png" class="charm-icon" alt=""></td><td>Живительное ядро</td><td>Добавляет 4 маски живокрови после отдыха.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/благословение-джони.png" class="charm-icon" alt=""></td><td>Благословение Джони</td><td>Заменяет всё здоровье на живокровь, лечение становится недоступно.</td><td>4</td></tr>
+    <tr><td><img src="images/амулеты/кровь-улья.png" class="charm-icon" alt=""></td><td>Кровь Улья</td><td>Постепенно восстанавливает последнее потерянное здоровье.</td><td>4</td></tr>
+    <tr><td><img src="images/амулеты/споровый-гриб.png" class="charm-icon" alt=""></td><td>Споровый гриб</td><td>При фокусе выпускает облако спор, наносящих урон.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/пронизывающая-тень.png" class="charm-icon" alt=""></td><td>Пронизывающая тень</td><td>Рывок наносит урон врагам.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/облик-унн.png" class="charm-icon" alt=""></td><td>Облик Унн</td><td>Позволяет двигаться во время фокуса.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/ореол-мастера-гвоздя.png" class="charm-icon" alt=""></td><td>Ореол мастера гвоздя</td><td>Ускоряет зарядку техник гвоздя.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/песнь-ткача.png" class="charm-icon" alt=""></td><td>Песнь ткача</td><td>Призывает маленьких ткачей, которые атакуют врагов.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/щит-грез.png" class="charm-icon" alt=""></td><td>Щит грёз</td><td>Создаёт вращающийся щит, блокирующий атаки.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/повелитель-грез.png" class="charm-icon" alt=""></td><td>Повелитель грёз</td><td>Ускоряет заряд Гвоздя грёз и увеличивает добычу сущности.</td><td>1</td></tr>
+    <tr><td><img src="images/амулеты/мрачное-дитя.png" class="charm-icon" alt=""></td><td>Мрачное дитя</td><td>Призывает дитя Гримма, которое стреляет в врагов. Прогресс зависит от Ритуала.</td><td>2</td></tr>
+    <tr><td><img src="images/амулеты/беспечная-песнь.png" class="charm-icon" alt=""></td><td>Беспечная песнь</td><td>Иногда полностью блокирует урон.</td><td>3</td></tr>
+    <tr><td><img src="images/амулеты/душа-короля.png" class="charm-icon" alt=""></td><td>Душа Короля</td><td>Постепенно восстанавливает ДУШУ. Требуется для финала.</td><td>5</td></tr>
+    <tr><td><img src="images/амулеты/сердце-пустоты.png" class="charm-icon" alt=""></td><td>Сердце пустоты</td><td>Финальный амулет. Не снимается. Объединяет Пустоту и даёт доступ к финальной концовке.</td><td>0</td></tr>
   </tbody>
 </table>
 </details>
-
 <details> <!--Прочее-->
-<summary><h2 id="3">Прочее</h2></summary>
+<summary><h2 id="Прочее">Прочее</h2></summary>
 <details>
 <summary><h4>Зот Гифкии</h4></summary>
 <div id="video-container" onclick="toggleFullscreen()">
@@ -540,7 +755,6 @@ html {
 <button id="close-btn" onclick="closeFullscreen()">✕</button>
 </details>
 </details>
-
 <details><!--Геомания-->
 <summary><h2>Геомания</h2></summary>
 
@@ -654,9 +868,8 @@ html {
 </details>
 </details>
 </details>
-
 <details> <!-- Лиги в таблице Мяты-->
-<summary><h2 id="4">Лиги в таблице Мяты</h2></summary>
+<summary><h2 id="Lugi">Лиги в таблице Мяты</h2></summary>
 <h4>🥇/🥈/🥉Выдаются за выполнение всех выделенных челленджей в соответствующей лиге.<br>
 Челленджи проще P5 или P1AB не принимаются.</h4>
 
@@ -741,9 +954,8 @@ html {
 
 </details>
 </details>
-
 <details> <!--Первые 16 игроков в СНГ HK с R5-->
-<summary><h2 id="5">Первые 16 игроков в СНГ HK с R5</h2></summary>
+<summary><h2 id="16SNGR5">Первые 16 игроков в СНГ HK с R5</h2></summary>
 <details>
 <summary><h3>Список</h3></summary>
 <img src="images/Список-игроков-R5.jpg"
@@ -1090,6 +1302,12 @@ html {
 <h3>Сообщение от Dinarpot</h3>
 <img src="images/@Dinarpot-R5.png"
      alt="Dinarpot-R5"
+     style="max-width: 200px; cursor: zoom-in;"
+     onclick="openLightbox(this.src)">
+	 
+<h3>Сообщение от Мяты о этом R5</h3>
+<img src="images/Dinarpot-R5.png"
+     alt="flinnnny R5"
      style="max-width: 200px; cursor: zoom-in;"
      onclick="openLightbox(this.src)">
 
